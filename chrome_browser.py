@@ -26,9 +26,9 @@ class Chrome(Browser):
         return history
 
     def __history_file_windows__(self):
-        local_app_data = os.getenv("%LOCALAPPDATA%")
+        local_app_data = os.getenv("LOCALAPPDATA")
         if not local_app_data:
-            print("%LOCALAPPDATA% not found")
+            print("LOCALAPPDATA not found")
             return Path()
 
         return Path(local_app_data).joinpath("Google/Chrome/User Data/Default/History")
