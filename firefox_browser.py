@@ -44,6 +44,7 @@ class Firefox(Browser):
     def __history_file_windows__(self):
         app_data = os.getenv("%APPDATA%")
         if not app_data:
+            print("%APPDATA% not found")
             return Path()
 
         return self.__find_places__(Path(app_data).joinpath("Mozilla/Firefox/Profiles"))
