@@ -1,7 +1,9 @@
 import re
+import shutil
+from pathlib import Path
 from operating_system import OperatingSystem
 
-C_URL_REGEX = re.compile("^https?\:\/\/((?P<sub_domain>([a-z0-9][a-z0-9_-]+?)+)\.)?(?P<domain>[a-z0-9][a-z0-9_-]+?)\.(?P<tld>[a-z]{2,3})(\/|$)?.+?$", re.IGNORECASE)
+C_URL_REGEX = re.compile("^https?\:\/\/((?P<sub_domain>([a-z0-9][a-z0-9_-]+?\.?)+)\.)?(?P<domain>[a-z0-9][a-z0-9_-]+?)\.(?P<tld>[a-z]{2,3})(\/|$)?.+?$", re.IGNORECASE)
 
 
 class Browser:
@@ -48,13 +50,13 @@ class Browser:
     def is_installed(self):
         return self.__history_file__.is_file() and self.__history_file__.exists()
 
-    def history_raw(self):
+    def __history_raw__(self):
         raise NotImplementedError("abstract browser called")
 
     def history(self):
         history = dict()
 
-        for row in self.history_raw():
+        for row in self.__history_raw__():
             if len(row) < 2:
                 continue
 
@@ -82,3 +84,12 @@ class Browser:
 
     def __history_file_mac__(self):
         raise NotImplementedError("abstract browser called")
+
+    def __copy_history_file__(self, new_name):
+        if not self.is_installed():
+            raise Exception("history file not found")
+
+        path = Path("." + new_name)
+        shutil.copy(str(self.__history_file__.absolute()), str(path.absolute()))
+
+        return str(path.absolute())
