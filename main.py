@@ -7,6 +7,7 @@ if chrome.is_installed():
 
     for (domain, visits) in chrome.history():
         print(domain + "\t" + str(visits) + " times visited")
+
 else:
     print("google chrome is not installed")
 
@@ -16,6 +17,7 @@ if firefox.is_installed():
 
     for (domain, visits) in firefox.history():
         print(domain + "\t" + str(visits) + " times visited")
+
 else:
     print("mozilla firefox is not installed")
 

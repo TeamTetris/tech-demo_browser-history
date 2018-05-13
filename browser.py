@@ -3,7 +3,7 @@ import shutil
 from pathlib import Path
 from operating_system import OperatingSystem
 
-C_URL_REGEX = re.compile("^https?\:\/\/((?P<sub_domain>([a-z0-9][a-z0-9_-]+?\.?)+)\.)?(?P<domain>[a-z0-9][a-z0-9_-]+?)\.(?P<tld>[a-z]{2,3})(\/|$)?.+?$", re.IGNORECASE)
+C_URL_REGEX = re.compile("^https?\:\/\/(?P<sub_domain>([a-z0-9][a-z0-9_-]*\.)*)(?P<domain>[a-z0-9][a-z0-9_-]*)\.(?P<tld>[a-z]{2,})(\/.*?$|$)", re.IGNORECASE)
 
 
 class Browser:
@@ -20,6 +20,9 @@ class Browser:
 
         if match.group("sub_domain"):
             sub_domain = match.group("sub_domain")
+
+            if sub_domain.endswith("."):
+                sub_domain = sub_domain[:-1]
 
         if match.group("domain"):
             domain = match.group("domain")
