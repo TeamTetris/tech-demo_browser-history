@@ -21,5 +21,5 @@ python3 main.py
 
 ## Known Issues
 
-- Url recognition might cause catastrophic backtracking (issue #1)
-- Url recognition does not support IP urls (issue #1)
+- Url recognition might cause catastrophic backtracking ([issue #1](https://github.com/TeamTetris/tech-demo_browser-history/issues/1))
+- Url recognition does not support IP urls ([issue #1](https://github.com/TeamTetris/tech-demo_browser-history/issues/1))
